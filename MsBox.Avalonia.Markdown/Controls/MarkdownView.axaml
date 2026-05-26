@@ -1,6 +1,9 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+        xmlns:avedit="https://github.com/avaloniaui/avaloniaedit"
+        xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
+        xmlns:markdown="using:MsBox.Avalonia.Markdown"
         xmlns:controls="using:MsBox.Avalonia.Controls">
     <Design.PreviewWith>
         <controls:MarkdownView />
@@ -9,7 +12,19 @@
     <Style Selector="controls|MarkdownView">
         <Setter Property="Template">
             <ControlTemplate>
-                <md:MarkdownScrollViewer Markdown="{TemplateBinding Markdown}" />
+                <md:MarkdownScrollViewer Markdown="{TemplateBinding Markdown}">
+                    <md:MarkdownScrollViewer.Styles>
+                        <Style Selector=".Markdown_Avalonia_MarkdownViewer Border.CodeBlock avedit|TextEditor">
+                            <Setter Property="FontFamily" Value="{x:Static markdown:MonospaceFontFamilyProvider.Value}" />
+                        </Style>
+                        <Style Selector=".Markdown_Avalonia_MarkdownViewer Border.CodeBlock TextBlock.CodeBlock">
+                            <Setter Property="FontFamily" Value="{x:Static markdown:MonospaceFontFamilyProvider.Value}" />
+                        </Style>
+                        <Style Selector=".Markdown_Avalonia_MarkdownViewer ctxt|CCode">
+                            <Setter Property="MonospaceFontFamily" Value="{x:Static markdown:MonospaceFontFamilyProvider.Value}" />
+                        </Style>
+                    </md:MarkdownScrollViewer.Styles>
+                </md:MarkdownScrollViewer>
             </ControlTemplate>
         </Setter>
     </Style>
